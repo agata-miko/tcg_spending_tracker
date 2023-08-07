@@ -4,7 +4,9 @@ import 'package:tcg_spending_tracker/widgets/answer_button.dart';
 import 'package:tcg_spending_tracker/data/questions.dart';
 
 class QuestionsScreen extends StatefulWidget {
-  const QuestionsScreen({Key? key}) : super(key: key);
+  const QuestionsScreen({required this.onSelectAnswer, Key? key}) : super(key: key);
+
+  final void Function(String answer) onSelectAnswer;
 
   @override
   State<QuestionsScreen> createState() => _QuestionsScreenState();
@@ -13,7 +15,8 @@ class QuestionsScreen extends StatefulWidget {
 class _QuestionsScreenState extends State<QuestionsScreen> {
   var currentQuestionIndex = 0;
 
-  void answerQuestion() {
+  void answerQuestion(String answer) {
+    widget.onSelectAnswer(answer);
     setState(() {
       currentQuestionIndex++;
     });
@@ -44,7 +47,9 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
             const SizedBox(height: 30.0),
             ...currentQuestion.getShuffledAnswers().map((answer) {
               return AnswerButton(
-                  answerText: answer, onPressed: answerQuestion);
+                  answerText: answer, onPressed: () {
+                    answerQuestion(answer);
+              });
             }),
           ],
         ),
