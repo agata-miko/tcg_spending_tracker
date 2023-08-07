@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tcg_spending_tracker/data/questions.dart';
+import 'package:tcg_spending_tracker/models/question_summary.dart';
 
 class ResultsScreen extends StatelessWidget {
   const ResultsScreen({required this.chosenAnswers, Key? key}) : super(key: key);
@@ -32,7 +33,7 @@ class ResultsScreen extends StatelessWidget {
           children: <Widget>[
             const Text('You answered ... out of ... questions correctly!'),
             const SizedBox(height: 30.0),
-            const Text('List of answers and questions'),
+            QuestionSummary(summaryData: getSummaryData()),
             const SizedBox(height: 30.0),
             TextButton(
               onPressed: () {},
