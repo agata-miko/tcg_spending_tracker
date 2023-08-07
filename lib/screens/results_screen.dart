@@ -1,7 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:tcg_spending_tracker/data/questions.dart';
 
 class ResultsScreen extends StatelessWidget {
-  const ResultsScreen({Key? key}) : super(key: key);
+  const ResultsScreen({required this.chosenAnswers, Key? key}) : super(key: key);
+
+  final List<String> chosenAnswers;
+
+  List<Map<String, Object>> getSummaryData () {
+    final List<Map<String, Object>> summary = [];
+
+    for (var i = 0; i < chosenAnswers.length; i++) {
+      summary.add({
+        'question_index': i,
+        'question': questions[i].text,
+        'correct_answer': questions[i].answers[0],
+        'user_answer': chosenAnswers[i],
+      });
+    }
+
+    return summary;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +36,7 @@ class ResultsScreen extends StatelessWidget {
             const SizedBox(height: 30.0),
             TextButton(
               onPressed: () {},
-              child: Text('Restart Quiz'),
+              child: const Text('Restart Quiz'),
             ),
           ],
         ),
