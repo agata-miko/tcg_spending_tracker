@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tcg_spending_tracker/widgets/answer_button.dart';
 import 'package:tcg_spending_tracker/data/questions.dart';
 
@@ -22,15 +23,28 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   Widget build(BuildContext context) {
     final currentQuestion = questions[currentQuestionIndex];
 
-    return SizedBox(width: double.infinity,
-      child: Container(margin: EdgeInsets.symmetric(horizontal: 40.0),
-        child: Column(mainAxisAlignment: MainAxisAlignment.center,
+    return SizedBox(
+      width: double.infinity,
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 40.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Text(currentQuestion.text, style: TextStyle(color: Colors.white), textAlign: TextAlign.center,),
+            Text(
+              currentQuestion.text,
+              style: GoogleFonts.lato(
+                textStyle: TextStyle(
+                    color: Colors.purple[50],
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0),
+              ),
+              textAlign: TextAlign.center,
+            ),
             const SizedBox(height: 30.0),
             ...currentQuestion.getShuffledAnswers().map((answer) {
-              return AnswerButton(answerText: answer, onPressed: answerQuestion);
+              return AnswerButton(
+                  answerText: answer, onPressed: answerQuestion);
             }),
           ],
         ),
@@ -38,5 +52,3 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
     );
   }
 }
-
-
